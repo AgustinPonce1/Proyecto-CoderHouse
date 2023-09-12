@@ -1,0 +1,14 @@
+<!-- ALUMNO AGUSTIN LUCAS PONCE DE LEON --> 
+<!-- # PROYECTO PYTHON - CURSO CODER HOUSE -->
+
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+        {% load static %}
+        <a class="navbar-brand" href="/sof-shoes/"><img style="width: 60px;" src="{% static 'assets/logo-sof.shoes.png' %}" alt=""></a>
+        <a class="navbar-brand" href="{% url 'Productos' %}">Productos</a>
+        <a class="navbar-brand" href="{% url 'Marcas' %}">Marcas</a>
+        <a class="navbar-brand" href="{% url 'SobreNosotros' %}">Sobre Nosotros</a>
+        <a class="navbar-brand" href="{% url 'Contacto' %}">Contacto</a>
+        <a class="btn btn-primary" href="#">Registrarse</a>
+    </div>
+</nav>

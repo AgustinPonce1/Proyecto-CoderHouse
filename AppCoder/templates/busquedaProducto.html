@@ -1,0 +1,62 @@
+<!-- ALUMNO AGUSTIN LUCAS PONCE DE LEON --> 
+<!-- # PROYECTO PYTHON - CURSO CODER HOUSE -->
+
+{% extends 'base.html' %}
+
+{% block contentThatChanges %}
+
+<div class="search-container">
+    <h1>Búsqueda de producto</h1>
+    <form action="{% url 'BuscarProducto' %}" method="get">
+        <p>Producto:</p>
+        <input type="text" name="consulta" placeholder="Ingrese el nombre del producto" required>
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+
+    .search-container {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    p {
+        font-weight: bold;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    button[type="submit"] {
+        background-color: #008CBA;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #005A8D;
+    }
+</style>
+
+{% endblock contentThatChanges %}

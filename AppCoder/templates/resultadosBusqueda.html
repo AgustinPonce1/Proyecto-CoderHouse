@@ -1,0 +1,62 @@
+<!-- ALUMNO AGUSTIN LUCAS PONCE DE LEON --> 
+<!-- # PROYECTO PYTHON - CURSO CODER HOUSE -->
+
+{% extends 'base.html' %}
+
+{% block contentThatChanges %}
+<div class="search-results">
+    <h2>Resultados de Búsqueda para "{{ modelo }}"</h2>
+
+    <ul class="results-list">
+        {% for resultado in resultados %}
+            <li class="result-item">{{ resultado }}</li>
+        {% empty %}
+            <li class="no-results">No se encontraron resultados.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+.search-results {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-results h2 {
+    font-size: 24px;
+    color: #008CBA;
+    margin-bottom: 20px;
+}
+
+.results-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.result-item {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.no-results {
+    font-size: 18px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+</style>
+{% endblock contentThatChanges %}

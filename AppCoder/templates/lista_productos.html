@@ -1,0 +1,75 @@
+<!-- ALUMNO AGUSTIN LUCAS PONCE DE LEON --> 
+<!-- # PROYECTO PYTHON - CURSO CODER HOUSE -->
+
+{% extends 'base.html' %}
+
+{% block contentThatChanges %}
+<div class="product-list">
+    <h2>Lista de Productos Disponibles</h2>
+    <ul class="product-items">
+        {% for producto in lista_productos %}
+            <li class="product-item">
+                <div class="product-info">
+                    <h3>{{ producto.nombre }}</h3>
+                    <p>Marca: {{ producto.marca }}</p>
+                    <p>Talle: {{ producto.talle }}</p> 
+                    <p>Precio: ${{ producto.precio }}</p>
+                </div>
+            </li>
+        {% empty %}
+            <li class="no-products">No hay productos disponibles.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+<style>
+    /* Estilos generales */
+.product-list {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.product-items {
+    list-style: none;
+    padding: 0;
+}
+
+.product-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.product-info h3 {
+    color: #333;
+    font-size: 18px;
+}
+
+.product-info p {
+    color: #666;
+    font-size: 14px;
+}
+
+.no-products {
+    text-align: center;
+    color: #999;
+    font-size: 18px;
+}
+
+/* Estilos para el encabezado */
+h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #008CBA;
+    margin-bottom: 20px;
+}
+
+</style>
+
+{% endblock contentThatChanges %}
+

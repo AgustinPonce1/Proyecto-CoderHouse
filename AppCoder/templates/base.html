@@ -1,0 +1,34 @@
+<!-- ALUMNO AGUSTIN LUCAS PONCE DE LEON --> 
+<!-- # PROYECTO PYTHON - CURSO CODER HOUSE -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Sof Shoes</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/logo-sof.shoes.png' %}" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/estilos.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        {% include 'navbar.html' %}
+        
+        
+        {% block contentThatChanges %}
+            
+        {% endblock contentThatChanges %}
+            
+        {% include 'footer.html' %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>
