@@ -56,8 +56,4 @@ La aplicación ofrece varios enlaces para acceder a diferentes secciones:
 
 Este proyecto esta desarrollado con el objetivo de brindar un proyecto final de alta calidad para el curso de Python orientado a Desarrollo Web en la plataforma de CoderHouse.
 
-## ¿Necesitas Ayuda? 🤔
-
-Si tienes alguna pregunta o necesitas asistencia técnica, no dudes en ponerte en contacto con nosotros en [contacto@sofshoes.com](mailto:contacto@sofshoes.com) 📧.
-
 ---
