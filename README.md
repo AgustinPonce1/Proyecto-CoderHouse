@@ -1,26 +1,3 @@
-# Nombre de tu Proyecto
-
-Descripción corta de tu proyecto.
-
-## Tabla de Contenidos
-
-- [Demo](#demo)
-- [Tecnologías Utilizadas](#tecnologías-utilizadas)
-- [Características](#características)
-- [Instalación](#instalación)
-- [Uso](#uso)
-- [Contribución](#contribución)
-- [Licencia](#licencia)
-- [Contacto](#contacto)
-
-## Demo
-
-Proporciona un enlace a una demo en vivo o capturas de pantalla de tu página web.
-
-## Tecnologías Utilizadas
-
-Enumera las tecnologías y frameworks que utilizaste en tu proyecto.
-
 ---
 
 # Sof Shoes 👟
