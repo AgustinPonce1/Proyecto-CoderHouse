@@ -1,0 +1,99 @@
+<!-- ALUMNO AGUSTIN LUCAS PONCE DE LEON -->
+<!-- PROYECTO PYTHON - CURSO CODER HOUSE -->
+
+{% extends 'base.html' %}
+
+{% block contentThatChanges %}
+<div class="editperfil-container">
+  <h1>Editar Perfil</h1>
+  <form method="post">
+    {% csrf_token %}
+    <label for="first_name">Nuevo nombre de usuario:</label>
+    <input type="text" name="first_name" required>
+    <label for="email">Nuevo correo electrónico:</label>
+    <input type="email" name="email" required>
+    <label for="description">Descripción:</label>
+    <textarea name="description" required></textarea>
+    <label for="website">Enlace a la página web:</label>
+    <input type="url" name="website" required>
+    <button type="submit">Guardar Cambios</button>
+</form>
+
+  <a href="{% url 'Usuarios' %}">Cancelar</a>
+</div>
+
+<style>
+    .editperfil-container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f7f7f7;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    form {
+      margin: 0;
+      padding: 0;
+    }
+
+    label,
+    input {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="email"]{
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    button[type="submit"] {
+      background-color: #008CBA;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .button {
+      background-color: #008CBA;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #005A8D;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 24px;
+      text-align: center;
+      color: #008CBA;
+      margin-bottom: 20px;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    a {
+      color: #008CBA;
+    }
+  </style>
+  
+{% endblock contentThatChanges %}

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block contentThatChanges %}
+<div class="perfil-container">
+    <h1>Mi Perfil</h1>
+    <p>Bienvenido, {{ user.username }}.</p>
+
+    <div>
+        <label for="first_name">Nombre de usuario: <strong>{{ user.username }}</strong></label><br>
+
+        <label for="email">Correo Electrónico: <strong>{{ user.email }}</strong></label>
+    </div>
+
+    <div>
+        {% if user.description %}
+            <label for="description">Descripción: <strong>{{ user.description }}</strong></label><br>
+        {% endif %}
+
+        {% if user.website %}
+            <label for="website">Enlace a la página web: <a href="{{ user.website }}" target="_blank"><strong>{{ user.website }}</strong></a></label>
+        {% endif %}
+    </div>
+
+    <div>
+        <a href="{% url 'editar_perfil' %}" class="btn btn-primary">Editar Perfil</a>
+        <a href="{% url 'change_password' %}" class="btn btn-primary">Cambiar Contraseña</a>
+    </div>
+</div>
+
+<style>
+    .perfil-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f7f7f7;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    form {
+        margin: 0;
+        padding: 0;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    button[type="submit"] {
+        background-color: #008CBA;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #005A8D;
+    }
+
+    h1 {
+        margin-top: 20px;
+        font-size: 24px;
+        text-align: center;
+        color: #008CBA;
+        margin-bottom: 20px;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    a {
+        color: #008CBA;
+    }
+</style>
+{% endblock contentThatChanges %}

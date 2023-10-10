@@ -1,11 +1,16 @@
 # ALUMNO AGUSTIN LUCAS PONCE DE LEON
 # PROYECTO PYTHON - CURSO CODER HOUSE
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse
 from .forms import *
 from django.db.models import Q #Añadi esta clase para los formularios y realizar las busquedas de filtro más complejas y flexibles
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, update_session_auth_hash
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 def producto(req, nombre, marca):
@@ -15,45 +20,52 @@ def producto(req, nombre, marca):
     <p>Producto: {producto.nombre} - Marca: {producto.marca} creado con éxito!</p>
     """)
 
-def listar_productos(req):
-    lista = Producto.objects.all()
-    return render(req, "lista_productos.html", {"lista_productos": lista})
+def listar_productos(request):
+
+    productos = Producto.objects.all()
+    
+    return render(request, 'lista_productos.html', {"lista_productos": productos})
 
 def inicio(req):
     return render(req, 'inicio.html')
 
-def productos(req):
-    return render(req, 'productos.html')
+def detalle_producto(request, producto_id):
 
-def marcas(req):
-    return render(req, 'marcas.html')
+    producto = get_object_or_404(Producto, id=producto_id)
+    return render(request, 'detalle_producto.html', {'producto': producto})
 
-def sobreNosotros(req):
-    return render(req, 'sobreNosotros.html')
+def marcas(request):
+    return render(request, 'marcas.html')
 
-def contacto(req):
-    return render(req, 'contacto.html')
+
+def SobreMi(request):
+    return render(request, 'SobreMi.html')
+
+def contacto(request):
+    return render(request, 'contacto.html')
 
 #FORMULARIO CLASE PRODUCTO
 def productoFormulario(req):
     if req.method == 'POST':
-        miFormulario = ProductoFormulario(req.POST)
+        miFormulario = ProductoFormulario(req.POST, req.FILES)
         if miFormulario.is_valid():
             data = miFormulario.cleaned_data
-            nombre = data['producto']
+            nombre = data['nombre']
             marca = data['marca']
             talle = data['talle']
             precio = data['precio']
-            producto_existente = Producto.objects.filter(nombre=nombre, marca=marca,talle=talle, precio=precio).first()
+            producto_existente = Producto.objects.filter(nombre=nombre, marca=marca, talle=talle, precio=precio).first()
             if producto_existente:
                 return HttpResponse(f'Ya existe este producto!')
             else:
-                producto = Producto(nombre=nombre, marca=marca, talle=data['talle'], precio=precio)
+                imagen = data.get('imagen')
+                producto = Producto(nombre=nombre, marca=marca, talle=talle, precio=precio, imagen=imagen) 
                 producto.save()
                 return render(req, 'inicio.html')
     else:
         miFormulario = ProductoFormulario()
     return render(req, 'productoFormulario.html', {"miFormulario": miFormulario})
+
     
 def busquedaProducto(req):
     return render(req, 'busquedaProducto.html')
@@ -115,7 +127,7 @@ def pedidoFormulario(req):
         miFormulario = PedidoFormulario(req.POST)
         if miFormulario.is_valid():
             miFormulario.save()  # Guardar el pedido en la base de datos
-            return render(req, 'inicio.html')  # O redirige a donde desees
+            return render(req, 'inicio.html')  # O redirige a donde desees, tambien se puede usar redirect
 
     else:
         miFormulario = PedidoFormulario()
@@ -176,3 +188,146 @@ def buscarProveedor(request):
     else:
         mensaje_error = "Por favor, ingresa un término de búsqueda para buscar proveedores."
         return render(request, 'errorBusqueda.html', {"mensaje_error": mensaje_error})
+    
+#LogIn de usuarios
+def loginView(req):
+
+    if req.method == 'POST':
+        miFormulario = AuthenticationForm(req, data=req.POST)
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            usuario = data['username']
+            psw = data['password']
+
+            user = authenticate(username=usuario, password=psw)
+
+            if user:
+                login(req, user)
+
+                return render(req, 'inicio.html', {"mensaje": f'Bienvenido {usuario}'})
+
+        return render(req, 'inicio.html', {"mensaje": f'Datos Incorrectos'})
+    else:
+        miFormulario = AuthenticationForm()
+        return render(req, 'login.html', {"miFormulario": miFormulario})
+
+#Registro de usuarios
+def register(req):
+    if req.method == 'POST':
+        miFormulario = CustomUserCreationForm(data=req.POST)
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            usuario = data['username']
+            miFormulario.save()
+            return render(req, 'inicio.html', {"mensaje": f'Usuario {usuario} creado con éxito'})
+        return render(req, 'inicio.html', {"mensaje": f'Formulario Inválido'})
+    else:
+        miFormulario = CustomUserCreationForm()
+        return render(req, 'registro.html', {"miFormulario": miFormulario})
+
+
+def agregar_avatar(req):
+
+    if req.method == 'POST':
+        miFormulario = AvatarFormulario(req.POST, req.FILES)
+
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            avatar = Avatar(user=req.user, imagen=data["imagen"])
+            avatar.save()
+            return render(req, 'inicio.html', {"mensaje": f'Avatar actualizado con éxito!', "url_avatar": avatar.imagen.url})
+            
+        return render(req, 'inicio.html', {"mensaje": f'Formulario Inválido'})
+    else:
+        miFormulario = AvatarFormulario()
+        return render(req, 'agregarAvatar.html', {"miFormulario": miFormulario})
+
+def user_view(request):
+    return render(request, 'usuarios.html', {'user': request.user})
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        user = request.user
+        user.username = request.POST.get('first_name')
+        user.email = request.POST.get('email')
+        user.description = request.POST.get('description') 
+        user.website = request.POST.get('website')  
+        user.save()
+        return render(request, 'usuarios.html', {'user': request.user})
+    return render(request, 'edit_profile.html', {'user': request.user})
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+
+        if password != confirm_password:
+            messages.error(request, 'Las contraseñas no coinciden.')
+        else:
+            user = request.user
+            user.set_password(password)
+            user.save()
+            update_session_auth_hash(request, user)
+
+            messages.success(request, 'La contraseña se cambió correctamente.')
+            return render(request, 'usuarios.html', {'user': request.user})
+
+    return render(request, 'change_password.html')
+
+def es_administrador(user):
+    return user.is_authenticated and user.is_staff 
+
+# Editar producto
+@user_passes_test(es_administrador)
+def editar_producto(request, pk):
+
+    producto = get_object_or_404(Producto, pk=pk)
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('ListaProductos')
+    else:
+        form = ProductoForm(instance=producto)
+    
+    return render(request, 'editar_producto.html', {'form': form, 'producto': producto})
+
+# Eliminar producto
+@user_passes_test(es_administrador)
+def eliminar_producto(request, pk):
+
+    producto = get_object_or_404(Producto, pk=pk)
+    
+    if request.method == 'POST':
+        producto.delete()
+        return redirect('ListaProductos')
+    
+    return render(request, 'eliminar_producto.html', {'producto': producto})
+
+@login_required
+def vista_de_mensajes(request):
+    try:
+        mensajes_enviados = Mensaje.objects.filter(remitente=request.user)
+        mensajes_recibidos = Mensaje.objects.filter(destinatario=request.user)
+
+        if request.method == 'POST':
+            formulario = MensajeForm(request.POST)
+            if formulario.is_valid():
+                mensaje = formulario.save(commit=False)
+                mensaje.remitente = request.user
+                mensaje.save()
+                return redirect('vista_de_mensajes')
+        else:
+            formulario = MensajeForm()
+
+        return render(request, 'mensajes.html', {
+            'mensajes_enviados': mensajes_enviados,
+            'mensajes_recibidos': mensajes_recibidos,
+            'formulario': formulario
+        })
+    except ObjectDoesNotExist:
+        mensaje_error = "No se encontraron mensajes o hubo un error al cargarlos."
+        return render(request, 'error.html', {'mensaje_error': mensaje_error})
+    

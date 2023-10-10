@@ -1,9 +1,32 @@
+# Nombre de tu Proyecto
+
+Descripción corta de tu proyecto.
+
+## Tabla de Contenidos
+
+- [Demo](#demo)
+- [Tecnologías Utilizadas](#tecnologías-utilizadas)
+- [Características](#características)
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Contribución](#contribución)
+- [Licencia](#licencia)
+- [Contacto](#contacto)
+
+## Demo
+
+Proporciona un enlace a una demo en vivo o capturas de pantalla de tu página web.
+
+## Tecnologías Utilizadas
+
+Enumera las tecnologías y frameworks que utilizaste en tu proyecto.
 
 ---
 
 # Sof Shoes 👟
 
 Sof Shoes es una aplicación web que te permite explorar nuestra tienda de zapatillas. Además, ofrece una serie de funciones y enlaces que facilitan la búsqueda en la base de datos, la adición de productos, clientes, proveedores, pedidos y más.
+Tambien permite hacer un logeo de usuarios y permite dar permisos a los mismos en caso de querer ser administrador de la web.
 
 ## Requisitos 📋
 
@@ -35,22 +58,23 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
 
 ## Uso 🌟
 
-La aplicación ofrece varios enlaces para acceder a diferentes secciones:
+La aplicacion ofrece varias secciones en las cuales podras registrarte, logearte, etc.
 
 - **sof-shoes/**: Página de inicio.
 - **lista-de-productos/**: Lista de productos disponibles.
-- **productos/**: Vista de productos disponibles.
-- **marcas/**: Vista de marcas (en desarrollo).
-- **sobreNosotros/**: Vista de "Sobre Nosotros" (en desarrollo).
-- **contacto/**: Vista de contacto (en desarrollo).
-- **productos-formulario/**: URL para crear productos.
-- **busqueda-producto/**: URL para buscar productos.
-- **clientes-formulario/**: URL para crear clientes.
-- **busqueda-cliente/**: URL para buscar clientes.
-- **pedidos-formulario/**: URL para crear pedidos.
-- **busqueda-pedido/**: URL para buscar pedidos.
-- **proveedores-formulario/**: URL para crear proveedores.
-- **busqueda-proveedor/**: URL para buscar proveedores.
+- **marcas/**: Vista de marcas.
+- **about-us/**: Vista donde podras conocer mas acerca de mi.
+- **contacto/**: Vista de contacto.
+---> En los botones de la aplicacion podras hacer otras acciones, ofrece las siguientes:
+- **Login**: Permitira logearse en la pagina web.
+- **Registrarse aqui**: Este estara dentro de Login y permite registrarse en caso de no estarlo.
+- **Perfil**: Permite ver su Perfil de Usuario.
+- **Editar Perfil**: Este estara dentro de Perfil y permite editar o agregar datos a su perfil; nombre de usuario, e-mail, descripcion, link a pagina web, avatar y contraseña.
+- **Salir**: Para salir del usuario.
+- **Editar**: Este boton esta disponible SOLO para administradores de la web y esta disponible en la solapa de Productos, este permite editar el producto, su nombre, sus talles y su precio.
+- **Eliminar**: Este boton esta disponible SOLO para administradores de la web y esta disponible en la solapa de Productos, este permite eliminar el producto.
+- **Agregar Producto**: Este boton esta disponible SOLO para administradores de la web y esta disponible en la solapa de Productos, este permite agregar un producto.
+---> Ademas esta aplicacion cuenta con un NavBar por el cual podras manejar todas las url disponibles y un footer para interactuar con un instagram, faceebok, twitter y otros.
 
 ## Contribución 🤝
 
@@ -58,6 +82,6 @@ Este proyecto esta desarrollado con el objetivo de brindar un proyecto final de 
 
 ## ¿Necesitas Ayuda? 🤔
 
-Si tienes alguna pregunta o necesitas asistencia técnica, no dudes en ponerte en contacto con nosotros en [contacto@sofshoes.com](mailto:contacto@sofshoes.com) 📧.
+Si tienes alguna pregunta o necesitas asistencia técnica, no dudes en ponerte en contacto con nosotros en [agustinlucaspdl@gmail.com](mailto:agustinlucaspdl@gmail.com) 📧.
 
 ---

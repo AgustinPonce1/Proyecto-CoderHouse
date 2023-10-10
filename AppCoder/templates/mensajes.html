@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block contentThatChanges %}
+<div class="container">
+    <h2>Mensajes</h2>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="user-menu">
+                <h3>Usuarios</h3>
+                <ul class="user-list">
+                    {% for usuario in usuarios %}
+                        <li><a href="{% url 'vista_de_mensajes' usuario.id %}">{{ usuario.username }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="message-list">
+                <h3>Mensajes</h3>
+                <ul class="message-items">
+                    {% for mensaje in mensajes %}
+                        <li>
+                            <div class="message">
+                                <p>{{ mensaje.contenido }}</p>
+                                <span class="message-sender">De: {{ mensaje.remitente }}</span>
+                                <span class="message-recipient">Para: {{ mensaje.destinatario }}</span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="message-form">
+                <h3>Enviar Mensaje</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ formulario.as_p }}
+                    <button type="submit" class="btn-enviar">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .user-menu {
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .user-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .user-list li {
+        margin-bottom: 10px;
+    }
+
+    .message-list {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    .message-list h3 {
+        margin-bottom: 10px;
+    }
+
+    .message-items {
+        list-style: none;
+        padding: 0;
+    }
+
+    .message {
+        background-color: #f2f2f2;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    .message p {
+        margin: 0;
+    }
+
+    .message-sender {
+        font-weight: bold;
+    }
+
+    .message-recipient {
+        font-style: italic;
+    }
+
+    .message-form {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+    }
+
+    .message-form h3 {
+        margin-bottom: 10px;
+    }
+
+    .btn-enviar {
+        background-color: #008CBA;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-enviar:hover {
+        background-color: #005A8D;
+    }
+</style>
+
+{% endblock contentThatChanges %}

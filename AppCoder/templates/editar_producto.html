@@ -1,0 +1,78 @@
+<!-- ALUMNO AGUSTIN LUCAS PONCE DE LEON -->
+<!-- PROYECTO PYTHON - CURSO CODER HOUSE -->
+
+<!-- CRUD -->
+
+{% extends 'base.html' %}
+
+{% block contentThatChanges %}
+<div class="product-edit">
+    <h2>Editar Producto</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="editar-producto-btn">Guardar Cambios</button>
+    </form>
+</div>
+
+<style>
+    .product-edit {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f7f7f7;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    form {
+        margin: 0;
+        padding: 0;
+    }
+
+    label,
+    input {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    button[type="submit"] {
+        background-color: #008CBA;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 20px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #005A8D;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 24px;
+        color: #008CBA;
+        margin-bottom: 20px;
+    }
+
+    .error-message {
+        color: #ff0000;
+        font-size: 14px;
+    }
+</style>
+
+
+{% endblock contentThatChanges %}

@@ -1,19 +1,30 @@
-<!-- ALUMNO AGUSTIN LUCAS PONCE DE LEON --> 
-<!-- # PROYECTO PYTHON - CURSO CODER HOUSE -->
+<!-- ALUMNO AGUSTIN LUCAS PONCE DE LEON -->
+<!-- PROYECTO PYTHON - CURSO CODER HOUSE -->
 
 {% extends 'base.html' %}
 
 {% block contentThatChanges %}
+
 <div class="product-list">
     <h2>Lista de Productos Disponibles</h2>
     <ul class="product-items">
         {% for producto in lista_productos %}
             <li class="product-item">
                 <div class="product-info">
-                    <h3>{{ producto.nombre }}</h3>
-                    <p>Marca: {{ producto.marca }}</p>
-                    <p>Talle: {{ producto.talle }}</p> 
-                    <p>Precio: ${{ producto.precio }}</p>
+                    <a href="{% url 'detalle_producto' producto.id %}">
+                        {% if producto.imagen %}
+                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" style="max-width: 150px;">
+                        {% else %}
+                            <p>No hay imagen disponible</p>
+                        {% endif %}
+                        <h3>{{ producto.nombre }}</h3>
+                        <p>Talles disponibles: {{ producto.talle }}</p> 
+                        <p>Precio: ${{ producto.precio }}</p>
+                        {% if user.is_staff %}
+                        <a href="{% url 'editar_producto' producto.id %}" class="btn-editar">Editar</a>
+                        <a href="{% url 'eliminar_producto' producto.id %}" class="btn-eliminar">Eliminar</a>
+                        {% endif %}
+                    </a>
                 </div>
             </li>
         {% empty %}
@@ -21,55 +32,105 @@
         {% endfor %}
     </ul>
 </div>
-
+{% if user.is_staff %}
+<div class="boton-p">
+    <a href="{% url 'productoFormulario' %}">
+        <button class="agregar-productos-btn" type="button">Agregar productos</button>
+    </a>
+</div>
+{% endif %}
 
 <style>
-    /* Estilos generales */
-.product-list {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-}
+    .product-list {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-.product-items {
-    list-style: none;
-    padding: 0;
-}
+    a{
+        text-decoration: none;
+    }
 
-.product-item {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
+    .product-items {
+        list-style: none;
+        padding: 0;
+    }
 
-.product-info h3 {
-    color: #333;
-    font-size: 18px;
-}
+    .product-item {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
 
-.product-info p {
-    color: #666;
-    font-size: 14px;
-}
+    .product-info h3 {
+        color: #333;
+        font-size: 18px;
+    }
 
-.no-products {
-    text-align: center;
-    color: #999;
-    font-size: 18px;
-}
+    .product-info p {
+        color: #666;
+        font-size: 14px;
+    }
 
-/* Estilos para el encabezado */
-h2 {
-    text-align: center;
-    font-size: 24px;
-    color: #008CBA;
-    margin-bottom: 20px;
-}
+    .no-products {
+        text-align: center;
+        color: #999;
+        font-size: 18px;
+    }
 
+    h2 {
+        text-align: center;
+        font-size: 24px;
+        color: #008CBA;
+        margin-bottom: 20px;
+    }
+
+    .boton-p{
+        text-align: center;
+    }
+
+    .agregar-productos-btn{
+        background-color: #008CBA;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        text-align: center;
+        margin-top: 20px; 
+    }
+
+    .agregar-productos-btn:hover {
+        background-color: #005A8D;
+    }
+
+    .btn-editar {
+        background-color: #5bc0de;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 3px;
+        font-size: 14px;
+        margin-right: 5px;
+        text-decoration: none;
+    }
+
+    .btn-eliminar {
+        background-color: #d9534f;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 3px;
+        font-size: 14px;
+        margin-right: 5px;
+        text-decoration: none;
+    }
 </style>
 
 {% endblock contentThatChanges %}
-

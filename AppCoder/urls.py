@@ -4,13 +4,14 @@
 from django.contrib import admin
 from django.urls import path
 from .views import *
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('lista-de-productos/', listar_productos, name="ListaProductos"),
     path('', inicio, name="Inicio"),
-    path('productos/', productos, name="Productos"),
+    path('productos/<int:producto_id>/', detalle_producto, name='detalle_producto'),
     path('marcas/', marcas, name="Marcas"),
-    path('sobreNosotros/', sobreNosotros, name="SobreNosotros"),
+    path('about-us/', SobreMi, name="SobreMi"),
     path('contacto/', contacto, name="Contacto"),
     #-- FORMULARIOS -- #
     #PRODUCTOS
@@ -29,4 +30,21 @@ urlpatterns = [
     path('proveedores-formulario/', proveedorFormulario, name="proveedorFormulario"),
     path('busqueda-proveedor/', busquedaProveedor, name="BusquedaProveedor"),
     path('buscar-proveedor/', buscarProveedor, name="BuscarProveedor"),
+    #LOGIN
+    path('login/', loginView, name="Login"),
+    #REGISTRO
+    path('register/', register, name="Registro"),
+    #LOGOUT
+    path('logout/', LogoutView.as_view(template_name="logout.html"), name="Logout"),
+    #AVATAR
+    path('agregar-avatar/', agregar_avatar, name="AgregarAvatar"),
+    #PERFILES
+    path('accounts/usuarios/', user_view, name='Usuarios'),
+    path('editar-perfil/', edit_profile, name='editar_perfil'),
+    path('profile/change_password/', change_password, name='change_password'),
+    #CRUD PRODUCTOS
+    path('productos/editar/<int:pk>/', editar_producto, name='editar_producto'),
+    path('productos/eliminar/<int:pk>/', eliminar_producto, name='eliminar_producto'),
+    #MESSAGES
+    path('messages/', vista_de_mensajes, name='vista_de_mensajes'),
 ]

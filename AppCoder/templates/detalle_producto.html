@@ -1,0 +1,54 @@
+<!-- ALUMNO AGUSTIN LUCAS PONCE DE LEON -->
+<!-- PROYECTO PYTHON - CURSO CODER HOUSE -->
+
+{% extends 'base.html' %}
+
+{% block contentThatChanges %}
+
+<div class="product-details-container">
+    <div class="product-details">
+        <h2>{{ producto.nombre }}</h2>
+        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="300">
+        <p>Talle: {{ producto.talle }}</p>
+        <p>Precio: ${{ producto.precio }}</p>
+    </div>
+</div>
+
+<style>
+    .product-details-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .product-details {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #f7f7f7;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 24px;
+        color: #008CBA;
+        margin-bottom: 20px;
+    }
+
+    img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
+    }
+
+    p {
+        font-size: 18px;
+        text-align: center;
+        margin-top: 10px;
+    }
+</style>
+
+{% endblock contentThatChanges %}
